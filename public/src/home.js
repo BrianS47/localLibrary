@@ -1,9 +1,23 @@
+
+const returnLength = (list) => {
+  return list.length
+}
+
+
+const makeTopFive = (list) => {
+  return list.slice(0,5)
+}
+
+const sortMostToLeast = (list) => {
+  return list.sort((a,b) => b.count - a.count)
+}
+
 function totalBooksCount(books) {
-  return books.length;
+  return returnLength(books)
 }
 
 function totalAccountsCount(accounts) {
-  return accounts.length;
+  return returnLength(accounts);
 }
 
 function booksBorrowedCount(books) {
@@ -33,7 +47,7 @@ function getMostCommonGenres(books) {
       count: genre[1],
     };
   });
-  const sortGenres = commonGenres.sort((a, b) => b.count - a.count);
+  const sortGenres = sortMostToLeast(commonGenres);
   const topFive = sortGenres.slice(0, 5);
   return topFive;
 }
@@ -44,20 +58,18 @@ function getMostPopularBooks(books) {
       count: book.borrows.length,
     };
   });
-  const sortBooks = popularBooks.sort((a, b) => b.count - a.count);
-  const topFive = sortBooks.slice(0, 5);
-  return topFive;
+  const sortBooks = sortMostToLeast(popularBooks)
+  const topFiveBooks = makeTopFive(sortBooks);
+  return topFiveBooks;
 }
 
 function getMostPopularAuthors(books, authors) {
 const getAuthors = books.reduce((acc, book)=> {
-if(!acc[book.authorId]) {
-  acc[book.authorId] = book.borrows.length
-} else {
-  acc[book.authorId] += book.borrows.length
-} 
-return acc
+!acc[book.authorId] ? acc[book.authorId] = book.borrows.length : acc[book.authorId] += book.borrows.length
+ return acc
 }, {}) 
+
+
 const authorIds = authors.map((author) => {
   return {
     name : `${author.name.first} ${author.name.last}`,
@@ -75,10 +87,10 @@ const mostPopular = (getAuthors,authorIds) => {
   return returnArr
 }
  const mostPopularAuthors = mostPopular(getAuthors,authorIds)
- const sortMostPopular = mostPopularAuthors.sort((a,b) => b.count - a.count)
- const topFive = sortMostPopular.slice(0,5)
+ const sortMostPopular = sortMostToLeast(mostPopularAuthors)
+ const topFiveAuthors = makeTopFive(mostPopularAuthors)
 
- return topFive 
+ return topFiveAuthors
 } 
 
 module.exports = {

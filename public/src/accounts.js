@@ -24,7 +24,7 @@ function numberOfBorrows(account, books) {
 }
 
 function getBooksPossessedByAccount(account, books, authors) {
-  const userId = account.id;
+  const {id:userId} = account;
   const borrowedBooks = books.filter(
     (book) =>
       book.borrows.findIndex(
