@@ -22,8 +22,7 @@ const returnedBooks = books.forEach(book => {
 })
 
 
-console.log(borrowedBooks)
-console.log(returnedBooksArr)
+
 const allBooks = []
 allBooks.push(borrowedBooks,returnedBooksArr)
 return allBooks
@@ -32,7 +31,7 @@ return allBooks
 
 function getBorrowersForBook(book, accounts) {
 const borrows = book.borrows
-console.log(borrows)
+
 const borrowers = borrows.map(borrow => borrow.id)
 const borrowerAccount = accounts.filter(account => borrowers.includes(account.id))
 

@@ -48,8 +48,8 @@ function getMostCommonGenres(books) {
     };
   });
   const sortGenres = sortMostToLeast(commonGenres);
-  const topFive = sortGenres.slice(0, 5);
-  return topFive;
+  const topFiveGenres = makeTopFive(sortGenres)
+  return topFiveGenres;
 }
 function getMostPopularBooks(books) {
   const popularBooks = books.map((book) => {
@@ -88,7 +88,7 @@ const mostPopular = (getAuthors,authorIds) => {
 }
  const mostPopularAuthors = mostPopular(getAuthors,authorIds)
  const sortMostPopular = sortMostToLeast(mostPopularAuthors)
- const topFiveAuthors = makeTopFive(mostPopularAuthors)
+ const topFiveAuthors = makeTopFive(sortMostPopular)
 
  return topFiveAuthors
 } 
